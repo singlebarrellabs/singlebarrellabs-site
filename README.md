@@ -28,6 +28,12 @@ regenerate it. The site uses:
 - `assets/brand/emblem.webp` — the approved master emblem, used decoratively in
   the hero and as the mobile header mark.
 
+The favicon is the one exception to using the emblem. At 16px the emblem's
+ticks, brackets, and barrel collapse into an indistinct smudge, so the tab icon
+uses a reduced glyph built from the mark's own structure: `{ }` at 16px, and
+`{ [ ] }` at 32px. It is a legibility stand-in, not a redraw, and it is used
+nowhere except the browser tab. `apple-touch-icon.png` keeps the real emblem.
+
 Source of truth and the full kit:
 `~/Documents/SingleBarrelLabs/brand-assets/`.
 
