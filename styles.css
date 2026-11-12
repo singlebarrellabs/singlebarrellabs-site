@@ -1,9 +1,15 @@
 :root {
-  --ink: #1a1714;
-  --muted: #6b6259;
-  --paper: #faf7f2;
-  --rule: #e2dcd2;
-  --accent: #8c4a1f;
+  --copper: #f47721;
+  --bronze: #c65a24;
+  --bronze-ink: #a34716;
+  --ivory: #f4e9d5;
+  --charcoal: #202329;
+
+  --ink: var(--charcoal);
+  --muted: #5f5a54;
+  --paper: var(--ivory);
+  --rule: #ddd0b4;
+  --accent: var(--bronze-ink);
   --measure: 44rem;
 }
 
@@ -39,9 +45,35 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: 0.6rem;
   color: var(--ink);
+}
+
+.brand-emblem {
+  display: block;
+  height: 2.5rem;
+  width: auto;
+}
+
+.brand-name {
   font-size: 0.82rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-name em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.tm {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  margin-left: -0.35rem;
+  font-size: 0.55rem;
+  line-height: 1;
+  color: var(--muted);
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .site-header nav { display: flex; gap: 1.5rem; }
@@ -103,5 +135,6 @@ footer {
 @media (max-width: 32rem) {
   .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .site-header nav { flex-wrap: wrap; gap: 1rem; }
+  .brand-emblem { height: 2.25rem; }
   .hero { padding: 3rem 0; }
 }
