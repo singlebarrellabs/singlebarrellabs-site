@@ -43,6 +43,7 @@
   "telephone": "+1-719-347-1146",
   "logo": "https://singlebarrellabs.com/assets/apple-touch-icon.png",
   "sameAs": [
+    "https://github.com/singlebarrellabs",
     "https://www.linkedin.com/company/single-barrel-labs"
   ],
   "description": "Boutique engineering studio building bespoke software, applied AI, and connected systems — engineered around the way your business actually works."
@@ -71,7 +72,7 @@
     <nav class="nav" id="primary-nav" aria-label="Primary">
       <a href="#capabilities">Capabilities</a>
       <a href="#approach">Approach</a>
-      <a href="#work">Work</a>
+      <a href="#work">Open Source</a>
       <a href="#contact">Contact</a>
       <a class="btn btn--primary btn--sm nav-cta" href="#contact">Discuss a Project</a>
     </nav>
@@ -242,23 +243,96 @@
   </section>
 
   <section class="section section--ivory" id="work" aria-labelledby="work-title">
-    <div class="container split">
-      <div class="split-head">
-        <p class="eyebrow">Selected Work</p>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Open Source</p>
         <h2 id="work-title">Engineering in Practice</h2>
         <p class="section-lede">
-          Client systems are usually proprietary, so detailed case studies are
-          shared in conversation rather than published here. A walkthrough covers
-          the problem, the architecture, the trade-offs, and what changed in the
-          business.
-        </p>
-        <p class="inline-link">
-          <a href="mailto:info@singlebarrellabs.com?subject=Recent%20work">Ask about recent work</a>
+          Tools we build and maintain in the open, published under MIT. These are
+          our own products, not client engagements — the source is the proof, so
+          the engineering can be read and judged directly.
         </p>
       </div>
 
+      <div class="card-grid card-grid--three">
+        <article class="card">
+          <p class="card-index">MCP server &middot; TypeScript</p>
+          <h3>google-services-mcp</h3>
+          <p class="card-copy">
+            134 tools across 11 Google services — Gmail, Calendar, Meet, Drive,
+            Contacts, Tasks, Sheets, Docs, Slides, YouTube, and Forms — with
+            multi-account OAuth, so an agent works against real user data.
+          </p>
+          <p class="card-foot">
+            <span>MIT</span>
+            <a class="card-link" href="https://github.com/singlebarrellabs/google-services-mcp" target="_blank" rel="noopener">View source<span aria-hidden="true"> ↗</span></a>
+          </p>
+        </article>
+
+        <article class="card">
+          <p class="card-index">MCP server &middot; TypeScript</p>
+          <h3>vscode-mcp-server</h3>
+          <p class="card-copy">
+            54 VS Code tools over SSE — debugger, integrated terminal, language
+            servers, file operations, and command execution — so an agent can
+            read, write, and debug a real workspace.
+          </p>
+          <p class="card-foot">
+            <span>MIT</span>
+            <a class="card-link" href="https://github.com/singlebarrellabs/vscode-mcp-server" target="_blank" rel="noopener">View source<span aria-hidden="true"> ↗</span></a>
+          </p>
+        </article>
+
+        <article class="card">
+          <p class="card-index">MCP server &middot; TypeScript</p>
+          <h3>pcbway-mcp-server</h3>
+          <p class="card-copy">
+            16 tools over the PCBWay Partner API — instant PCB and SMT assembly
+            quotes, order lifecycle (place, confirm, cancel, track), shipping
+            costs, and account balance.
+          </p>
+          <p class="card-foot">
+            <span>MIT</span>
+            <a class="card-link" href="https://github.com/singlebarrellabs/pcbway-mcp-server" target="_blank" rel="noopener">View source<span aria-hidden="true"> ↗</span></a>
+          </p>
+        </article>
+
+        <article class="card">
+          <p class="card-index">OpenCode v2 plugin &middot; JavaScript</p>
+          <h3>opencode-model-failover</h3>
+          <p class="card-copy">
+            Moves a session to the next healthy model in a chain you define when
+            a provider rate-limits, times out, or fails — with retryable-only
+            filtering, cooldowns, and no runtime dependencies.
+          </p>
+          <p class="card-foot">
+            <span>MIT</span>
+            <a class="card-link" href="https://github.com/singlebarrellabs/opencode-model-failover" target="_blank" rel="noopener">View source<span aria-hidden="true"> ↗</span></a>
+          </p>
+        </article>
+
+        <article class="card">
+          <p class="card-index">OpenCode v2 plugin &middot; JavaScript</p>
+          <h3>opencode-rtk-plugin</h3>
+          <p class="card-copy">
+            Routes every shell command through <code>rtk</code> so command output
+            reaches the model in compressed form. The upstream project reports
+            60–90% fewer tokens on common dev commands.
+          </p>
+          <p class="card-foot">
+            <span>MIT</span>
+            <a class="card-link" href="https://github.com/singlebarrellabs/opencode-rtk-plugin" target="_blank" rel="noopener">View source<span aria-hidden="true"> ↗</span></a>
+          </p>
+        </article>
+      </div>
+
+      <p class="inline-link">
+        <a href="https://github.com/singlebarrellabs" target="_blank" rel="noopener">All repositories on GitHub<span aria-hidden="true"> ↗</span></a>
+      </p>
+
       <!--
-        Reusable case study card. Fill in only with verified client work.
+        Reusable case study card. Uncomment and fill in only with verified client
+        work; keep the claim proportional to what the client agreed to publish.
 
         <article class="case-study">
           <p class="card-index">Case study</p>
@@ -273,7 +347,7 @@
       -->
 
       <div class="delivery">
-        <p class="delivery-label">A delivery typically includes</p>
+        <p class="delivery-label">How we build</p>
         <ul class="delivery-list">
           <li><span>Architecture decision records</span><span>Why the system is shaped the way it is</span></li>
           <li><span>Tested, documented code</span><span>Readable by the next engineer, not only the author</span></li>
@@ -365,8 +439,18 @@
         <p class="footer-label">Navigate</p>
         <a href="#capabilities">Capabilities</a>
         <a href="#approach">Approach</a>
-        <a href="#work">Work</a>
+        <a href="#work">Open Source</a>
         <a href="#contact">Contact</a>
+      </nav>
+
+      <nav class="footer-nav" aria-label="Open source repositories">
+        <p class="footer-label">Open Source</p>
+        <a href="https://github.com/singlebarrellabs/google-services-mcp" target="_blank" rel="noopener">google-services-mcp</a>
+        <a href="https://github.com/singlebarrellabs/vscode-mcp-server" target="_blank" rel="noopener">vscode-mcp-server</a>
+        <a href="https://github.com/singlebarrellabs/pcbway-mcp-server" target="_blank" rel="noopener">pcbway-mcp-server</a>
+        <a href="https://github.com/singlebarrellabs/opencode-model-failover" target="_blank" rel="noopener">opencode-model-failover</a>
+        <a href="https://github.com/singlebarrellabs/opencode-rtk-plugin" target="_blank" rel="noopener">opencode-rtk-plugin</a>
+        <a href="https://github.com/singlebarrellabs" target="_blank" rel="noopener">All repositories ↗</a>
       </nav>
 
       <div class="footer-contact">
