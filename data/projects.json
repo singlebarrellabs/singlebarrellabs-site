@@ -1,16 +1,16 @@
 {
   "org": "singlebarrellabs",
   "siteRepo": "singlebarrellabs-site",
-  "exclude": [
-    "google-workspace-admin-mcp"
-  ],
+  "gridMax": 6,
+  "exclude": [],
   "order": [
     "google-services-mcp",
     "vscode-mcp-server",
     "pcbway-mcp-server",
     "opencode-model-failover",
     "opencode-rtk-plugin",
-    "opencode-media-panel"
+    "opencode-media-panel",
+    "google-workspace-admin-mcp"
   ],
   "overrides": {
     "google-services-mcp": {
@@ -36,6 +36,10 @@
     "opencode-media-panel": {
       "kicker": "OpenCode v2 TUI plugin &middot; TypeScript",
       "copy": "Plays GIFs and video inside the terminal UI, in a session panel — media stays with the work instead of in another window."
+    },
+    "google-workspace-admin-mcp": {
+      "kicker": "MCP server &middot; in development",
+      "copy": "Brings the Workspace admin plane into an agent — Directory, Reports, Alert Center, Vault, Cloud Search, Data Transfer, and Licensing. Admin OAuth only: no impersonation, no service accounts."
     }
   }
 }

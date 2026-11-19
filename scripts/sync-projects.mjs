@@ -117,10 +117,22 @@ function renderCard(repo, override) {
   return lines.join("\n");
 }
 
-function renderGrid(entries) {
+function renderList(entries, gridMax) {
   const cards = entries
     .map(({ repo, override }) => renderCard(repo, override))
     .join("\n\n");
+
+  // Beyond gridMax the list becomes one horizontal row with native scrolling:
+  // no JS, every card still in the DOM. Fewer than scroll arrows' worth of
+  // hidden content, and the scroll container stays keyboard reachable.
+  if (entries.length > gridMax) {
+    return [
+      `${CARD_INDENT}<div class="card-grid card-grid--row" role="region" aria-label="Open-source repositories" tabindex="0">`,
+      cards,
+      `${CARD_INDENT}</div>`,
+    ].join("\n");
+  }
+
   return [
     `${CARD_INDENT}<div class="card-grid card-grid--three">`,
     cards,
@@ -158,6 +170,7 @@ async function main() {
   const excluded = new Set([siteRepo, ...(config.exclude ?? [])]);
   const order = config.order ?? [];
   const overrides = config.overrides ?? {};
+  const gridMax = Number.isInteger(config.gridMax) ? config.gridMax : 6;
 
   const repos = await fetchRepos(org);
   const entries = repos
@@ -174,7 +187,7 @@ async function main() {
     throw new Error(`no usable repositories returned for ${org}; index.html left untouched`);
   }
 
-  const grid = renderGrid(entries);
+  const grid = renderList(entries, gridMax);
   const footer = renderFooterLinks(entries);
 
   if (DRY_RUN) {
@@ -189,9 +202,9 @@ async function main() {
 
   const curated = entries.filter((entry) => entry.override?.copy).length;
   console.log(
-    `synced ${entries.length} repositories from ${org} (${curated} with curated copy): ${entries
-      .map((entry) => entry.repo.name)
-      .join(", ")}`,
+    `synced ${entries.length} repositories from ${org} (${curated} with curated copy, layout: ${
+      entries.length > gridMax ? "horizontal row" : "grid"
+    }): ${entries.map((entry) => entry.repo.name).join(", ")}`,
   );
 }
 
