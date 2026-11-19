@@ -149,6 +149,24 @@ function renderFooterLinks(entries) {
     .join("\n");
 }
 
+function assertConfigMatches(entries, config) {
+  const present = new Set(entries.map((entry) => entry.repo.name));
+  const deliberateAbsence = new Set(config.exclude ?? []);
+  const stale = [
+    ...(config.order ?? []),
+    ...Object.keys(config.overrides ?? {}),
+  ].filter((name) => !present.has(name) && !deliberateAbsence.has(name));
+
+  const unique = [...new Set(stale)];
+  if (unique.length === 0) return;
+
+  throw new Error(
+    `data/projects.json names repositories that were not returned by ${config.org ?? "singlebarrellabs"}: ${unique.join(", ")}. ` +
+      "A rename or deletion makes these keys stale, which would silently drop curated copy and ordering. " +
+      "Rename the keys in data/projects.json, or list the names in \"exclude\" if their absence is deliberate.",
+  );
+}
+
 function replaceBlock(html, name, content, indent) {
   const pattern = new RegExp(
     `(<!--\\s*${name}:start\\s*-->)[\\s\\S]*?(<!--\\s*${name}:end\\s*-->)`,
@@ -186,6 +204,8 @@ async function main() {
   if (entries.length === 0) {
     throw new Error(`no usable repositories returned for ${org}; index.html left untouched`);
   }
+
+  assertConfigMatches(entries, config);
 
   const grid = renderList(entries, gridMax);
   const footer = renderFooterLinks(entries);
