@@ -3,7 +3,8 @@
 One-page site for Single Barrel Labs LLC, served at singlebarrellabs.com.
 
 Static HTML and CSS with one small inline script for the mobile menu. No build
-step, no dependencies, no framework.
+step, no dependencies, no framework. The deploy workflow runs one dependency-free
+Node script that refreshes the open-source list from GitHub before publishing.
 
 ## Files
 
@@ -11,6 +12,8 @@ step, no dependencies, no framework.
 |---|---|
 | `index.html` | The page |
 | `styles.css` | Design tokens, components, layout |
+| `scripts/sync-projects.mjs` | Regenerates the open-source list from GitHub |
+| `data/projects.json` | Curated copy, ordering, and exclusions for that list |
 | `sitemap.xml`, `robots.txt` | Search engine configuration |
 | `assets/brand/` | Approved lockup and emblem, trimmed for web |
 | `assets/fonts/` | Inter variable font, latin subset |
@@ -49,6 +52,51 @@ rules, type scale, spacing, container width, radii, focus colours, and motion.
 Headings use charcoal on ivory and ivory on charcoal. Copper is reserved for
 accents and primary actions; `--copper-deep` is the accessible text colour on
 ivory surfaces.
+
+## Open-source project list
+
+The cards under "Engineering in Practice" and the footer repository links are
+generated from the public repositories of the `singlebarrellabs` org, so a new
+repository appears on the site without an HTML edit.
+
+Two marker pairs in `index.html` delimit the generated regions:
+
+```html
+<!-- projects:start -->        … cards …        <!-- projects:end -->
+<!-- projects-footer:start --> … links …        <!-- projects-footer:end -->
+```
+
+The deploy workflow runs `node scripts/sync-projects.mjs` after checkout and
+before the Pages artifact is uploaded. The published page is therefore plain
+static HTML — nothing is fetched in the browser. The committed HTML keeps the
+last generated cards inside the markers, so a local preview and a failed sync
+both leave the page intact.
+
+`data/projects.json` is the overlay:
+
+| Key | Effect |
+|---|---|
+| `org` | Org to list (default `singlebarrellabs`) |
+| `siteRepo` | Excluded automatically (default `singlebarrellabs-site`) |
+| `exclude` | Repositories to leave off the page |
+| `order` | Names first, in this order; anything else follows alphabetically |
+| `overrides` | Per-repo `kicker`, `copy`, `license` |
+
+Curated `copy` wins over the GitHub description; everything not overridden uses
+the repository's own description, language, and detected licence. Text from the
+API is escaped, while `copy` and `kicker` in `projects.json` are trusted HTML —
+so `&middot;` and inline `<code>` are allowed there.
+
+Archived and forked repositories are skipped. Without an override, a repository
+with no description gets a generic line and a warning in the workflow log.
+
+Sync locally (writes `index.html`, commit the result if you want the fallback to
+stay current):
+
+```sh
+GITHUB_TOKEN=$(gh auth token) node scripts/sync-projects.mjs
+GITHUB_TOKEN=$(gh auth token) node scripts/sync-projects.mjs --dry-run
+```
 
 ## Local preview
 
