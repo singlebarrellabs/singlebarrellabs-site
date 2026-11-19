@@ -1,11 +1,11 @@
 {
   "org": "singlebarrellabs",
   "siteRepo": "singlebarrellabs-site",
-  "exclude": [
-    "google-workspace-admin-mcp"
-  ],
+  "gridMax": 6,
+  "exclude": [],
   "order": [
     "google-services-mcp",
+    "google-workspace-admin-mcp",
     "vscode-mcp-server",
     "pcbway-mcp-server",
     "opencode-model-failover",
@@ -16,6 +16,10 @@
     "google-services-mcp": {
       "kicker": "MCP server &middot; TypeScript",
       "copy": "134 tools across 11 Google services — Gmail, Calendar, Meet, Drive, Contacts, Tasks, Sheets, Docs, Slides, YouTube, and Forms — with multi-account OAuth, so an agent works against real user data."
+    },
+    "google-workspace-admin-mcp": {
+      "kicker": "MCP server &middot; in development",
+      "copy": "Brings the Workspace admin plane into an agent — Directory, Reports, Alert Center, Vault, Cloud Search, Data Transfer, and Licensing. Admin OAuth only: no impersonation, no service accounts."
     },
     "vscode-mcp-server": {
       "kicker": "MCP server &middot; TypeScript",

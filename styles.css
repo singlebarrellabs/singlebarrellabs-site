@@ -616,6 +616,35 @@ ul, ol { margin: 0; padding: 0; }
   .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
+/* Long project lists: one horizontal row, native scroll, no JavaScript. Every
+   card stays in the document, so nothing is hidden from search or assistive
+   technology. `proximity` rather than `mandatory` keeps the scroll free. */
+.card-grid--row {
+  grid-template-columns: none;   /* cancel the 3-column grid above */
+  grid-auto-flow: column;
+  grid-auto-columns: 20rem;      /* ~2.7 cards per row: the next one peeks */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 0.25rem;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+
+.card-grid--row > .card { scroll-snap-align: start; }
+
+/* The row is focusable so Safari and Firefox users can pan it from the
+   keyboard; Chromium's automatic scroller focus is not universal. */
+.card-grid--row:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 40rem) {
+  .card-grid--row { grid-auto-columns: minmax(15.5rem, 84%); }
+}
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .card {
     transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;

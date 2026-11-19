@@ -78,6 +78,7 @@ both leave the page intact.
 |---|---|
 | `org` | Org to list (default `singlebarrellabs`) |
 | `siteRepo` | Excluded automatically (default `singlebarrellabs-site`) |
+| `gridMax` | Most cards that stay a three-column grid (default `6`); above it the list becomes one scrolling row |
 | `exclude` | Repositories to leave off the page |
 | `order` | Names first, in this order; anything else follows alphabetically |
 | `overrides` | Per-repo `kicker`, `copy`, `license` |
@@ -89,6 +90,13 @@ so `&middot;` and inline `<code>` are allowed there.
 
 Archived and forked repositories are skipped. Without an override, a repository
 with no description gets a generic line and a warning in the workflow log.
+
+Past `gridMax` repositories the list stops being a grid and becomes one
+horizontal row with native scrolling (`scroll-snap-type: x proximity`). It is
+still HTML with no JavaScript: every card is in the document, the fourth card
+peeks past the right edge as the affordance, and the row is focusable
+(`tabindex="0"`, `role="region"`) so Safari and Firefox users can pan it from
+the keyboard.
 
 Sync locally (writes `index.html`, commit the result if you want the fallback to
 stay current):
